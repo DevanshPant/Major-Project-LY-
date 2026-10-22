@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}ResumeAI — Semantic Resume Screening{% endblock %}
+{% block content %}
+
+<div class="container">
+  <section class="hero">
+    <h1>Your ATS<br>is only as smart<br>as your <em>reader.</em></h1>
+    <p class="sub">
+      Screen hundreds of resumes against any JD using semantic embeddings — not keyword bingo.
+      Every shortlist comes with a defensible explanation.
+    </p>
+    <p class="tagline">Stop skimming resumes. Start understanding them.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="/admin">Screen resumes →</a>
+      <a class="btn btn-ghost" href="/compare">Compare vs. keyword ATS</a>
+    </div>
+  </section>
+</div>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>Parse</span><span>Extract</span><span>Embed</span><span>Retrieve</span>
+    <span>Rerank</span><span>Score</span><span>Explain</span><span>Shortlist</span>
+    <span>Parse</span><span>Extract</span><span>Embed</span><span>Retrieve</span>
+    <span>Rerank</span><span>Score</span><span>Explain</span><span>Shortlist</span>
+  </div>
+</div>
+
+<section class="block">
+  <div class="container">
+    <span class="eyebrow">Core Features</span>
+    <h2>What Resume.AI does</h2>
+    <p class="lead">Six things a keyword ATS cannot. All defensible in a viva.</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="num">01 / 06</div>
+        <h3>Semantic matching</h3>
+        <p>Sentence-BERT (MiniLM-L6-v2) encodes each resume and JD into 384-dim vectors, so "TensorFlow" still ranks for a "deep learning" JD.</p>
+      </div>
+      <div class="feature">
+        <div class="num">02 / 06</div>
+        <h3>Two-stage retrieval</h3>
+        <p>FAISS surfaces the top 40 candidates in milliseconds. A cross-encoder then reads each JD-resume pair jointly and produces the final ranking.</p>
+      </div>
+      <div class="feature">
+        <div class="num">03 / 06</div>
+        <h3>Fixes the 80% experience gap</h3>
+        <p>Regex + spaCy correctly extract years of experience where the baseline ATS defaulted to 0 for 8 out of 10 candidates in our tests.</p>
+      </div>
+      <div class="feature">
+        <div class="num">04 / 06</div>
+        <h3>Explainable scores</h3>
+        <p>Every candidate breaks down into semantic, skills, experience and education sub-scores — with matched and missing skills listed. No black box.</p>
+      </div>
+      <div class="feature">
+        <div class="num">05 / 06</div>
+        <h3>Bias-check mode</h3>
+        <p>One toggle strips names, emails and phone numbers before scoring, so hiring decisions can be defended as identity-blind.</p>
+      </div>
+      <div class="feature">
+        <div class="num">06 / 06</div>
+        <h3>Batch-first workflow</h3>
+        <p>Drop a ZIP of 500 PDFs or DOCX files. Set a top-N cutoff. Download a clean ranked CSV. Built for the real recruiter loop.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee">
+  <div class="marquee-track">
+    <span>MiniLM · L6 · V2</span><span>FAISS</span><span>MS-MARCO Cross-Encoder</span>
+    <span>Weighted Scoring</span><span>PDF · DOCX · ZIP</span><span>CSV Export</span>
+    <span>MiniLM · L6 · V2</span><span>FAISS</span><span>MS-MARCO Cross-Encoder</span>
+    <span>Weighted Scoring</span><span>PDF · DOCX · ZIP</span><span>CSV Export</span>
+  </div>
+</div>
+
+<section class="block">
+  <div class="container">
+    <span class="eyebrow">How it works</span>
+    <h2>Four stages<br><em>honest scores.</em></h2>
+    <p class="lead">No fabricated data. No hidden weights. Every number is the model's actual output.</p>
+
+    <div class="features">
+      <div class="feature">
+        <div class="num">Stage 01</div>
+        <h3>Parse</h3>
+        <p>PDF, DOCX, TXT or a ZIP folder. Text extracted and normalised. Failed files are flagged, never silently dropped.</p>
+      </div>
+      <div class="feature">
+        <div class="num">Stage 02</div>
+        <h3>Extract</h3>
+        <p>Skills lexicon + regex + spaCy pull skills, years of experience, and degree family from resume and JD.</p>
+      </div>
+      <div class="feature">
+        <div class="num">Stage 03</div>
+        <h3>Retrieve</h3>
+        <p>MiniLM embeddings + FAISS cosine search shortlists the strongest candidates in milliseconds.</p>
+      </div>
+      <div class="feature">
+        <div class="num">Stage 04</div>
+        <h3>Rerank & score</h3>
+        <p>Cross-encoder rereads each pair jointly. A weighted scorer combines semantic, skills, experience and education.</p>
+      </div>
+    </div>
+
+    <div class="center mt-lg">
+      <a class="btn btn-primary" href="/admin">Try it with your JD →</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

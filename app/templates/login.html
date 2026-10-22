@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}Admin login — ResumeAI{% endblock %}
+{% block content %}
+<div class="container" style="max-width:520px">
+  <section class="hero" style="padding: 96px 0 32px;">
+    <span class="eyebrow">Admin Access</span>
+    <h1 style="font-size: clamp(40px, 6vw, 68px)">Sign in<br><em>to screen.</em></h1>
+    <p class="sub">Recruiter access is restricted. Enter your credentials to reach the batch-matching console.</p>
+  </section>
+
+  <form method="post" action="/login" class="panel">
+    {% if error %}
+    <div class="alert" style="margin-bottom:20px">Invalid username or password.</div>
+    {% endif %}
+    {% if default_creds %}
+    <div class="alert info" style="margin-bottom:20px">
+      Default credentials in use — change <code>RESUMEAI_ADMIN_PASS</code> before demo.
+      Try <b>admin</b> / <b>resume-ai-2026</b>.
+    </div>
+    {% endif %}
+    <div class="field">
+      <label for="username">Username</label>
+      <input type="text" id="username" name="username" required autofocus autocomplete="username">
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required autocomplete="current-password" style="letter-spacing:0.1em">
+    </div>
+    <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center">Sign in →</button>
+  </form>
+
+  <div class="center" style="margin-top:24px">
+    <a href="/" style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted)">← Back to home</a>
+  </div>
+</div>
+{% endblock %}

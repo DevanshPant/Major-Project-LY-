@@ -1,0 +1,40 @@
+# ---- Python ----
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+*.bak
+
+# ---- Large datasets (not redistributable, fetch with scripts/) ----
+# Kaggle resume corpus: download via scripts/download_data.py
+data/Resume.csv
+data/corpus.parquet
+# Scanned PDF corpus (2.3 GB)
+Resumes PDF/
+Resume_Testing/
+Test files/
+# Generated sample/demo files
+data/sample_uploads/
+data/demo_ready/
+data/stuffed_demo/
+
+# ---- Model artefacts (regenerate with scripts/) ----
+# Fine-tuned cross-encoder is 133 MB, over the GitHub file size limit.
+# Reproduce with: python -m scripts.train_reranker --epochs 1 --limit 800
+models/cross_encoder_finetuned/
+models/*.faiss
+models/*.parquet
+models/ocr_cache.db
+models/ocr_cache.db-shm
+models/ocr_cache.db-wal
+models/scorer_weights.json
+
+# ---- Runtime ----
+*.log
+.DS_Store
+Thumbs.db
+
+# NOTE: data/*.json measurement results ARE tracked on purpose.
+# They are the numbers the paper is built from.

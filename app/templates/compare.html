@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% block title %}Model comparison — ResumeAI{% endblock %}
+{% block content %}
+<div class="container">
+  <section class="hero" style="padding: 72px 0 40px;">
+    <span class="eyebrow">Model Comparison</span>
+    <h1 style="font-size: clamp(40px, 6vw, 80px)">Old ATS vs. <em>semantic AI.</em></h1>
+    <p class="sub">Same JD. Same resumes. TF-IDF baseline on the left — MiniLM + Cross-Encoder on the right.</p>
+  </section>
+
+  <div class="panel">
+    <p class="section-title">01 · Job Description</p>
+    <div class="field">
+      <label>Upload a JD file (PDF · DOCX · TXT)</label>
+      <div class="dropzone" id="jdDrop" style="padding:22px">
+        <div style="font-size:14px"><strong id="jdDropLabel">Drop a JD file</strong> or click to browse</div>
+        <div style="font-size:11px; letter-spacing:0.16em; text-transform:uppercase; margin-top:6px; color:var(--muted)">Up to 20 MB · overrides pasted text</div>
+        <input type="file" id="jdFile" hidden accept=".pdf,.docx,.txt">
+      </div>
+    </div>
+    <div class="field">
+      <label for="jd">Or paste it directly</label>
+      <textarea id="jd" placeholder="Paste the JD you want to test against…"></textarea>
+    </div>
+    <p class="section-title" style="margin-top:36px">02 · Resumes</p>
+    <div class="field">
+      <label>PDF · DOCX · TXT · ZIP</label>
+      <div class="dropzone" id="drop">
+        <div style="font-size:15px"><strong>Drop files, a folder, or a ZIP here</strong></div>
+        <div style="font-size:12px; letter-spacing:0.16em; text-transform:uppercase; margin-top:8px; color:var(--muted)">Up to 2 GB per batch · ZIP recommended</div>
+        <div style="display:flex; gap:10px; justify-content:center; margin-top:16px; flex-wrap:wrap;">
+          <button type="button" class="btn btn-ghost" id="pickFilesBtn" style="padding:8px 16px; font-size:11px">Choose files</button>
+          <button type="button" class="btn btn-ghost" id="pickFolderBtn" style="padding:8px 16px; font-size:11px">Choose folder</button>
+          <button type="button" class="btn btn-ghost hidden" id="clearFilesBtn" style="padding:8px 16px; font-size:11px; color:var(--bad); border-color:var(--bad)">Clear all</button>
+        </div>
+        <input type="file" id="files" multiple hidden accept=".pdf,.docx,.txt,.zip">
+        <input type="file" id="filesFolder" multiple hidden webkitdirectory directory>
+      </div>
+      <div id="fileSummary" class="file-summary hidden"></div>
+      <ul class="file-list" id="fileList"></ul>
+    </div>
+    <div class="row-2">
+      <div class="field">
+        <label for="topn">Top-N per model</label>
+        <input type="number" id="topn" min="1" max="50" value="10">
+      </div>
+      <div class="field" style="display:flex; align-items:end;">
+        <button class="btn btn-primary" id="goBtn">Compare →</button>
+      </div>
+    </div>
+    <div id="alert"></div>
+  </div>
+
+  <div class="loader" id="loader"><div class="spinner"></div><span>Running both pipelines</span></div>
+
+  <div id="cmpWrap" class="hidden mt-lg">
+    <div class="row-2">
+      <div>
+        <div class="results-header"><h3>Baseline · TF-IDF</h3><span class="badge">Model 1</span></div>
+        <div id="baselineList"></div>
+      </div>
+      <div>
+        <div class="results-header"><h3>New · MiniLM + CE</h3><span class="badge good">Model 2</span></div>
+        <div id="newList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script>initCompare();</script>{% endblock %}
